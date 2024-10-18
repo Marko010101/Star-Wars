@@ -6,7 +6,7 @@ import GlobalStyles from "./styles/globalStyles.js";
 import Loader from "./components/ui/Loader.jsx";
 import AppLayout from "./components/AppLayout.jsx";
 
-const Characters = lazy(() => import("./pages/characters.jsx"));
+const Characters = lazy(() => import("./pages/Characters.jsx"));
 const CharacterDetails = lazy(() => import("./pages/CharacterDetails.jsx"));
 
 const App = () => {
