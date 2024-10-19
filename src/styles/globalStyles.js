@@ -25,7 +25,7 @@ const GlobalStyles = createGlobalStyle`
   --font-size-tiny: 1.2rem;
   --font-size-small: 1.4rem;
   --font-size-medium: 1.6rem;
-  --font-size-big: 2rem;
+  --font-size-big: 1.8rem;
   --font-size-large: 2.2rem;
   --font-size-huge: 2.4rem;
   --font-size-extra-huge: 3rem;

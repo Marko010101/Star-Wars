@@ -3,14 +3,14 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 
 import { fetchCharactersDetails } from "../service/apiCharacters.js";
-import Loader from "../components/ui/Loader.jsx";
 import { fetchPlanet } from "../service/apiPlanets.js";
 import { getNumberFromUrl } from "../utils/getNumberFromUrl.js";
 import Button from "../components/ui/Button.jsx";
-import DisplayFilms from "../components/ui/DisplayFilms.jsx";
-import DisplaySpecies from "../components/ui/DisplaySpecies.jsx";
-import DisplayStarships from "../components/ui/DisplayStarships.jsx";
-import DisplayVehicles from "../components/ui/DisplayVehicles.jsx";
+import DisplayFilms from "../components/DisplayFilms.jsx";
+import DisplaySpecies from "../components/DisplaySpecies.jsx";
+import DisplayStarships from "../components/DisplayStarships.jsx";
+import DisplayVehicles from "../components/DisplayVehicles.jsx";
+import LoaderMini from "../components/ui/LoaderMini.jsx";
 
 const CharacterDetails = () => {
   let { characterId } = useParams();
@@ -19,8 +19,8 @@ const CharacterDetails = () => {
   const [openDetail, setOpenDetail] = useState(null);
   const [isLoading, setisLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [isLoadingHiddenData, setIsLoadingHiddenData] = useState(false);
 
-  console.log(character);
   useEffect(() => {
     setisLoading(true);
     const loadCharacter = async (characterId) => {
@@ -41,7 +41,7 @@ const CharacterDetails = () => {
     loadCharacter(characterId);
   }, [characterId]);
 
-  if (isLoading) return <Loader />;
+  if (isLoading) return <ReStyledLoaderMini size="medium" />;
   if (error) return <p>{error}</p>;
 
   const {
@@ -66,7 +66,6 @@ const CharacterDetails = () => {
     setOpenDetail((prev) => (prev === name ? null : name));
   };
 
-  console.log(films.length);
   return (
     <>
       <CharacterDetailsWrapper>
@@ -109,34 +108,70 @@ const CharacterDetails = () => {
           action={() => handleChangeDisplay("films")}
           isActive={openDetail === "films"}
         >
-          Films: {films.length}
+          {isLoadingHiddenData && openDetail === "films" ? (
+            <LoaderMini />
+          ) : (
+            ` Films: ${films.length}`
+          )}
         </Button>
         <Button
           isClickable={species.length > 0}
           action={() => handleChangeDisplay("species")}
           isActive={openDetail === "species"}
         >
-          Species: {species.length}
+          {isLoadingHiddenData && openDetail === "species" ? (
+            <LoaderMini />
+          ) : (
+            ` Species: ${species.length}`
+          )}
         </Button>
         <Button
           isClickable={starships.length > 0}
           action={() => handleChangeDisplay("starships")}
           isActive={openDetail === "starships"}
         >
-          Starships: {starships.length}
+          {isLoadingHiddenData && openDetail === "starships" ? (
+            <LoaderMini />
+          ) : (
+            ` Straships: ${starships.length}`
+          )}
         </Button>
         <Button
           isClickable={vehicles.length > 0}
           action={() => handleChangeDisplay("vehicles")}
           isActive={openDetail === "vehicles"}
         >
-          Vehicles: {vehicles.length}
+          {isLoadingHiddenData && openDetail === "vehicles" ? (
+            <LoaderMini />
+          ) : (
+            ` Vehicles: ${vehicles.length}`
+          )}
         </Button>
 
-        {openDetail === "films" && <DisplayFilms />}
-        {openDetail === "species" && <DisplaySpecies />}
-        {openDetail === "starships" && <DisplayStarships />}
-        {openDetail === "vehicles" && <DisplayVehicles />}
+        {openDetail === "films" && (
+          <DisplayFilms
+            films={films}
+            setIsLoadingHiddenData={setIsLoadingHiddenData}
+          />
+        )}
+        {openDetail === "species" && (
+          <DisplaySpecies
+            species={species}
+            setIsLoadingHiddenData={setIsLoadingHiddenData}
+          />
+        )}
+        {openDetail === "starships" && (
+          <DisplayStarships
+            starships={starships}
+            setIsLoadingHiddenData={setIsLoadingHiddenData}
+          />
+        )}
+        {openDetail === "vehicles" && (
+          <DisplayVehicles
+            vehicles={vehicles}
+            setIsLoadingHiddenData={setIsLoadingHiddenData}
+          />
+        )}
       </StyledHiddenDetails>
     </>
   );
@@ -187,4 +222,11 @@ const StyledHiddenDetails = styled.div`
     align-self: center;
     justify-self: center;
   }
+`;
+
+const ReStyledLoaderMini = styled(LoaderMini)`
+  margin: 15rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

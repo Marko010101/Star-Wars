@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const Button = ({ children, isClickable, action, isActive }) => {
-  console.log(isActive);
   return (
     <StyledButton
       onClick={isClickable ? action : undefined}
@@ -16,6 +15,7 @@ const Button = ({ children, isClickable, action, isActive }) => {
 export default Button;
 
 const StyledButton = styled.button`
+  min-width: 10rem;
   padding: 1rem 1.6rem;
   background-color: ${({ $isActive, $isClickable }) =>
     $isClickable && $isActive
