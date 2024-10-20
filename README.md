@@ -2,7 +2,7 @@
 
 ### Technologies
 
-In this project, I used React for the frontend, styled-components for styling, and react-router-dom for routing. I aimed to write as much of the project by hand as possible and chose not to use React Query, even though it could have been helpful for fetching, caching, and pagination.
+In this project, I used React for the frontend, styled-components for styling, and react-router-dom for routing. I aimed to write as much of the project by hand as possible and chose not to use Tanstack Query, even though it could have been helpful for fetching, caching, and pagination.
 
 ### Main Page & Search Functionality
 
@@ -14,11 +14,13 @@ I created a button for each page of results—since there are only 9 pages for t
 
 ### Details Page & Hidden Info
 
-On each character's details page, I initially display only essential information. Below this, there are four buttons for additional hidden details (films, species, starships, and vehicles). Clicking these buttons toggles the corresponding data. I send new HTTP requests for each button click and display only the relevant information. If the same button is clicked again, the info is hidden. I created separate files for each hidden detail component, but they share the same styles to optimize performance (I couldn’t reuse a single file because the data structures are different).
+On each character's details page, I initially display only essential information. Below this, there are four buttons for additional hidden details (films, species, starships, and vehicles). Clicking these buttons toggles the corresponding data, but the button without data will not be clickable. I send new HTTP requests for each button click and display only the relevant information. If the same button is clicked again, the info is hidden. I created separate files for each hidden detail component, but they share the same styles to optimize performance (I couldn’t reuse a single file because the data structures are different).
 
 ### Project Timeline
 
 I completed the main requirements for this project in two days including paggination and implemented responsiveness on the third day.
+
+### Check out the live version of my project here : https://sstarwarss.netlify.app/
 
 ### How to Launch the Project
 
@@ -32,3 +34,4 @@ You need to have Node.js installed on your computer. After that, clone this repo
 4.Run the development server: npm run dev
 
 Follow the link provided in the terminal by pressing CTRL + left-click, or copy and paste the link into your browser's address bar.
+
