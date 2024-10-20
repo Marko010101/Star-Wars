@@ -33,6 +33,10 @@ const GlobalStyles = createGlobalStyle`
 
   --site-width: 120rem;
 
+  --small: 576px;
+  --medium: 768px;
+  --large: 992px;
+  --huge: 1200px;
 }
 
 *,
@@ -113,6 +117,29 @@ h6 {
 
 img {
   max-width: 100%;
+}
+
+@media screen and (max-width: 1200px) {
+  html {
+    font-size: 60%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  html {
+    font-size: 57.5%;
+  }
+}
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 55%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  html {
+    font-size: 50%;
+  }
 }
 
 

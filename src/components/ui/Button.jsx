@@ -15,6 +15,9 @@ const Button = ({ children, isClickable, action, isActive }) => {
 export default Button;
 
 const StyledButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   min-width: 10rem;
   padding: 1rem 1.6rem;
   background-color: ${({ $isActive, $isClickable }) =>
@@ -33,5 +36,11 @@ const StyledButton = styled.button`
       $isActive
         ? "var(--color-jedi-blue-darker)"
         : "var(--color-jedi-blue-dark)"};
+  }
+
+  @media screen and (max-width: 576px) {
+    padding: 1rem;
+    font-size: var(--font-size-small);
+    min-width: 7rem;
   }
 `;

@@ -103,50 +103,52 @@ const CharacterDetails = () => {
         </StyledDetails>
       </CharacterDetailsWrapper>
       <StyledHiddenDetails>
-        <Button
-          isClickable={films.length > 0}
-          action={() => handleChangeDisplay("films")}
-          isActive={openDetail === "films"}
-        >
-          {isLoadingHiddenData && openDetail === "films" ? (
-            <LoaderMini />
-          ) : (
-            ` Films: ${films.length}`
-          )}
-        </Button>
-        <Button
-          isClickable={species.length > 0}
-          action={() => handleChangeDisplay("species")}
-          isActive={openDetail === "species"}
-        >
-          {isLoadingHiddenData && openDetail === "species" ? (
-            <LoaderMini />
-          ) : (
-            ` Species: ${species.length}`
-          )}
-        </Button>
-        <Button
-          isClickable={starships.length > 0}
-          action={() => handleChangeDisplay("starships")}
-          isActive={openDetail === "starships"}
-        >
-          {isLoadingHiddenData && openDetail === "starships" ? (
-            <LoaderMini />
-          ) : (
-            ` Straships: ${starships.length}`
-          )}
-        </Button>
-        <Button
-          isClickable={vehicles.length > 0}
-          action={() => handleChangeDisplay("vehicles")}
-          isActive={openDetail === "vehicles"}
-        >
-          {isLoadingHiddenData && openDetail === "vehicles" ? (
-            <LoaderMini />
-          ) : (
-            ` Vehicles: ${vehicles.length}`
-          )}
-        </Button>
+        <div>
+          <Button
+            isClickable={films.length > 0}
+            action={() => handleChangeDisplay("films")}
+            isActive={openDetail === "films"}
+          >
+            {isLoadingHiddenData && openDetail === "films" ? (
+              <LoaderMini />
+            ) : (
+              ` Films: ${films.length}`
+            )}
+          </Button>
+          <Button
+            isClickable={species.length > 0}
+            action={() => handleChangeDisplay("species")}
+            isActive={openDetail === "species"}
+          >
+            {isLoadingHiddenData && openDetail === "species" ? (
+              <LoaderMini />
+            ) : (
+              ` Species: ${species.length}`
+            )}
+          </Button>
+          <Button
+            isClickable={starships.length > 0}
+            action={() => handleChangeDisplay("starships")}
+            isActive={openDetail === "starships"}
+          >
+            {isLoadingHiddenData && openDetail === "starships" ? (
+              <LoaderMini />
+            ) : (
+              ` Straships: ${starships.length}`
+            )}
+          </Button>
+          <Button
+            isClickable={vehicles.length > 0}
+            action={() => handleChangeDisplay("vehicles")}
+            isActive={openDetail === "vehicles"}
+          >
+            {isLoadingHiddenData && openDetail === "vehicles" ? (
+              <LoaderMini />
+            ) : (
+              ` Vehicles: ${vehicles.length}`
+            )}
+          </Button>
+        </div>
 
         {openDetail === "films" && (
           <DisplayFilms
@@ -184,6 +186,10 @@ const CharacterDetailsWrapper = styled.div`
   margin-top: 5rem;
   padding: 2rem 2rem 3rem 2rem;
   border-radius: 0.8rem;
+
+  @media screen and (max-width: 768px) {
+    padding: 2rem 1rem;
+  }
 `;
 const StyledDetails = styled.div`
   h2 {
@@ -209,6 +215,15 @@ const StyledDetails = styled.div`
         font-weight: var(--font-weight-regular);
       }
     }
+
+    @media screen and (max-width: 992px) {
+      column-gap: 2.5rem;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media screen and (max-width: 576px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
   }
 `;
 
@@ -217,6 +232,21 @@ const StyledHiddenDetails = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   color: var(--color-secondary-background);
+
+  & > div {
+    grid-column: 1/-1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10rem;
+    gap: 0.5rem;
+    @media screen and (max-width: 768px) {
+      padding: 0 6rem;
+    }
+    @media screen and (max-width: 576px) {
+      padding: 0 1rem;
+    }
+  }
 
   & > button {
     align-self: center;

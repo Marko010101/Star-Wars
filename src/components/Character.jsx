@@ -37,6 +37,15 @@ const CharacterCard = styled(Link)`
     align-self: center;
     width: max-content;
   }
+
+  @media screen and (max-width: 1200px) {
+    padding: 1.5rem 3rem;
+    gap: 1rem;
+  }
+  @media screen and (max-width: 992px) {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
 `;
 
 const Character = ({ character }) => {

@@ -16,4 +16,6 @@ export const StyledInput = styled.input`
   &::placeholder {
     color: #aaa;
   }
+
+  
 `;

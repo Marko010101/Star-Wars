@@ -48,6 +48,13 @@ const StyledPagination = styled.div`
   & > div {
     display: flex;
     gap: 1.5rem;
+    
+    @media screen and (max-width: 768px) {
+      gap: 1rem;
+    }
+    @media screen and (max-width: 576px) {
+      gap: 0.5rem;
+    }
   }
 `;
 
@@ -60,6 +67,10 @@ const StyledDirectionButton = styled.button`
   padding: 0.5rem 1.5rem;
   border-radius: 3rem;
   background-color: transparent;
+
+  @media screen and (max-width: 576px) {
+    display: none;
+  }
 
   &:hover {
     background-color: var(--color-jedi-blue-darker);

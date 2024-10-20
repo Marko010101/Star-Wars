@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { CiSearch } from "react-icons/ci";
+import { TiDelete } from "react-icons/ti";
 
 import {
   fetchCharacters,
@@ -21,6 +22,7 @@ const Characters = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
+  const [searchPage, setSearchPage] = useState(1);
 
   const fetchData = async (fetchFunction, setData, setLoadingState, page) => {
     try {
@@ -49,16 +51,24 @@ const Characters = () => {
     setIsLoadingSearchData(true);
     const delayDebounce = setTimeout(() => {
       fetchData(
-        () => fetchSearchedCharacter(query),
+        () => fetchSearchedCharacter(query, searchPage),
         setSearchedResult,
         setIsLoadingSearchData
       );
-    }, 700);
-
+    }, 500);
     return () => clearTimeout(delayDebounce);
-  }, [query, totalPage, characters.count]);
+  }, [query, searchPage]);
 
-  // if (isLoading) return <ReStyledLoaderMini />;
+  useEffect(() => {
+    if (query.trim().length > 0) {
+      setSearchPage(1);
+    }
+  }, [query]);
+
+  function handleClearQuery() {
+    setQuery("");
+    setSearchPage(1);
+  }
   if (error) return <p>{error}</p>;
   return (
     <>
@@ -69,9 +79,15 @@ const Characters = () => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <span>
-          <CiSearch size={24} />
-        </span>
+        {query.length >= 1 ? (
+          <span onClick={handleClearQuery}>
+            <TiDelete size={24} />
+          </span>
+        ) : (
+          <span>
+            <CiSearch size={24} />
+          </span>
+        )}
       </StyledInputWrapper>
       <StyledCharactersList>
         {isLoading ? (
@@ -97,13 +113,23 @@ const Characters = () => {
         )}
       </StyledCharactersList>
 
-      {totalPage > 1 && (
+      {totalPage > 1 && query.length >= 1 && (
+        <Pagination
+          currentPage={searchPage}
+          setCurrentPage={setSearchPage}
+          totalPage={totalPage}
+          setTotalPage={setTotalPage}
+          isLoading={isLoadingSearchedData || isLoading}
+        />
+      )}
+
+      {totalPage > 1 && query.length < 1 && (
         <Pagination
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           totalPage={totalPage}
           setTotalPage={setTotalPage}
-          isLoading={isLoadingSearchedData || isLoading}
+          isLoading={isLoading}
         />
       )}
     </>
@@ -121,6 +147,13 @@ const StyledCharactersList = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 2rem;
+
+    @media screen and (max-width: 1200px) {
+      grid-gap: 1rem;
+    }
+    @media screen and (max-width: 576px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
 
     & > p {
       grid-column: 1/-1;
@@ -144,6 +177,14 @@ const StyledInputWrapper = styled.div`
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
+
+    & > svg {
+      fill: var(--color-secondary-primary);
+    }
+  }
+
+  @media screen and (max-width: 576px) {
+    width: 34rem;
   }
 `;
 

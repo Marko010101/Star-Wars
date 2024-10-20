@@ -16,8 +16,10 @@ export async function fetchCharactersDetails(id) {
   return data;
 }
 
-export async function fetchSearchedCharacter(query) {
-  const response = await fetch(`${swapApi}people/?search=${query}`);
+export async function fetchSearchedCharacter(query, page = 1) {
+  const response = await fetch(
+    `${swapApi}people/?search=${query}&page=${page}`
+  );
   if (!response.ok)
     throw new Error("Failed to load searched characters. Please try again.");
   const result = await response.json();
