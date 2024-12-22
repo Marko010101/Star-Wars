@@ -1,1 +1,1 @@
-export const swapApi = "https://swapi.dev/api/";
+export const swapApi = "https://swapi.py4e.com/api/";
